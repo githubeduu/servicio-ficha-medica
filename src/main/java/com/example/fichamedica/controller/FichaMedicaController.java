@@ -25,8 +25,6 @@ import com.example.fichamedica.service.FichaMedicaService;
 import com.example.fichamedica.service.MedicoService;
 import com.example.fichamedica.service.PacienteService;
 
-import lombok.extern.slf4j.Slf4j;
-
 import java.util.List;
 import java.util.Optional;
 
