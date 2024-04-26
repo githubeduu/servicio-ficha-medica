@@ -33,4 +33,14 @@ public class MedicoServicelmpl implements MedicoService{
     public void deleteMedico(Long id){
         medicoRepository.deleteById(id);
     } 
+
+    @Override
+    public Medico updateMedico(Long id, Medico medicoDetails) {
+        Medico medico = medicoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Medico no encontrado con id " + id));
+
+        medico.setEspecialidad(medicoDetails.getEspecialidad());   
+
+        return medicoRepository.save(medico);
+    }
 }
