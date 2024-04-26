@@ -30,8 +30,14 @@ public class PacienteServicelmpl implements PacienteService{
     }
 
     @Override
-    public Paciente updatePaciente(Paciente paciente) {
-    return pacienteRepository.save(paciente);
+    public Paciente updatePaciente(Long id, Paciente pacienteDetails) {
+        Paciente paciente = pacienteRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Paciene no encontrado con id " + id));
+
+        paciente.setTelefono(pacienteDetails.getTelefono());
+        paciente.setDireccion(pacienteDetails.getDireccion());
+        paciente.setCorreo(pacienteDetails.getCorreo());
+        return pacienteRepository.save(paciente);
     }
 
     @Override

@@ -10,5 +10,7 @@ public interface MedicoService {
     Optional<Medico> getMedicoById(Long id);
     Medico createMedico(Medico medico); 
     void deleteMedico(Long id);
+    Medico updateMedico(Long id, Medico medico);
+  
 }
 

@@ -9,7 +9,7 @@ public interface PacienteService {
     List<Paciente> getAllPaciente();
     Optional<Paciente> getPacienteById(Long id);
     Paciente createPaciente(Paciente paciente); 
-    Paciente updatePaciente(Paciente paciente);
+    Paciente updatePaciente(Long id, Paciente paciente);
     void deletePaciente(Long id);
     
 }
