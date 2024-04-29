@@ -1,15 +1,12 @@
 package com.example.fichamedica.controller;
 
 import static org.mockito.Mockito.when;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,8 +27,6 @@ import com.example.fichamedica.DTO.CreacionFichaMedicaDTO;
 import com.example.fichamedica.model.FichaMedica;
 import com.example.fichamedica.model.Medico;
 import com.example.fichamedica.model.Paciente;
-import com.example.fichamedica.repository.MedicoRepository;
-import com.example.fichamedica.repository.PacienteRepository;
 import com.example.fichamedica.service.FichaMedicaService;
 import com.example.fichamedica.service.MedicoService;
 import com.example.fichamedica.service.PacienteService;
