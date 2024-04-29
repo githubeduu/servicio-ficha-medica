@@ -21,6 +21,8 @@ import com.example.fichamedica.service.FichaMedicaService;
 import com.example.fichamedica.service.MedicoService;
 import com.example.fichamedica.service.PacienteService;
 
+import jakarta.persistence.EntityNotFoundException;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -209,16 +211,14 @@ public class FichaMedicaController {
 
     @GetMapping("/ficha/{id}")
     public ResponseEntity<?> getFichaById(@PathVariable Long id) {
-        Optional<FichaMedica> ficha = fichaMedicaService.getFichaMedicaById(id);
-        if (ficha.isPresent()) {
-            EntityModel<FichaMedica> resource = EntityModel.of(ficha.get(),
-                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).getFichaById(id)).withSelfRel(),
-                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).getAllFicha()).withRel("all-fichas"));
-            return ResponseEntity.ok(resource);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ficha no encontrada");
-        }
+        FichaMedica ficha = fichaMedicaService.getFichaMedicaById(id)
+            .orElseThrow(() -> new EntityNotFoundException("Ficha médica no encontrada"));
+        EntityModel<FichaMedica> resource = EntityModel.of(ficha,
+            WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).getFichaById(id)).withSelfRel(),
+            WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).getAllFicha()).withRel("all-fichas"));
+        return ResponseEntity.ok(resource);
     }
+
 
     @PostMapping("/ficha")
     public ResponseEntity<?> createFichaMedica(@Validated @RequestBody CreacionFichaMedicaDTO fichaMedicaDTO) {
@@ -245,5 +245,10 @@ public class FichaMedicaController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al crear la ficha medica: " + e.getMessage());
         }
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<?> handleEntityNotFound(EntityNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 }

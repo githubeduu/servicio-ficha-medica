@@ -1,6 +1,7 @@
 package com.example.fichamedica.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -23,7 +24,7 @@ public class FichaMedicaService {
     private FichaMedicaRepository fichaMedicaRepositoryMock;
 
     @Test
-    public void guardarFichaMedicaTest() {
+    public void CrearFichaMedicaTest() {
 
         FichaMedica fichaMedica = new FichaMedica();
         fichaMedica.setDiasLicencia(2);
@@ -34,4 +35,19 @@ public class FichaMedicaService {
 
         assertEquals(2, resultado.getDiasLicencia());
     }
+
+    @Test
+    public void CrearFichaMedicaErrorTest() {
+        FichaMedica fichaMedica = new FichaMedica();
+        fichaMedica.setDiasLicencia(2);
+
+        when(fichaMedicaRepositoryMock.save(any())).thenThrow(new RuntimeException("Error de base de datos"));
+
+        Exception exception = assertThrows(RuntimeException.class, () -> {
+            fichaMedicaServicio.createFichaMedica(fichaMedica);
+        });
+
+        assertEquals("Error de base de datos", exception.getMessage());
+    }
+
 }
