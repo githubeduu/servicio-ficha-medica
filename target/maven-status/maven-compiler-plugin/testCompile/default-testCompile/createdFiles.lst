@@ -1,1 +1,4 @@
-com\example\fichamedica\service\FichaMedicaService.class
+com\example\fichamedica\controller\FichaMedicaControllerTest.class
+com\example\fichamedica\FichamedicaApplicationTests.class
+com\example\fichamedica\service\FichaMedicaServiceTest.class
+com\example\fichamedica\repository\FichaMedicaRepositoryTest.class

@@ -28,6 +28,7 @@ import com.example.fichamedica.model.FichaMedica;
 import com.example.fichamedica.model.Medico;
 import com.example.fichamedica.model.Paciente;
 import com.example.fichamedica.service.FichaMedicaService;
+import com.example.fichamedica.service.FichaMedicaServiceTest;
 import com.example.fichamedica.service.MedicoService;
 import com.example.fichamedica.service.PacienteService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -36,7 +37,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(FichaMedicaController.class)
 @AutoConfigureMockMvc(addFilters = false)
-@Import({FichaMedicaService.class, MedicoService.class, PacienteService.class})
+@Import({FichaMedicaServiceTest.class, MedicoService.class, PacienteService.class})
 public class FichaMedicaControllerTest {
 
     @Autowired
